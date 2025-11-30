@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "name": "GameplayInput",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "0392b3cf-15a2-4219-86a0-0b2299062100",
+            "actions": [
+                {
+                    "name": "SwitchMode",
+                    "type": "Button",
+                    "id": "49a8c703-2733-4d57-bce1-fafcf2252129",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f78b5cdd-5cc6-4d79-8c93-3342d53aff8e",
+                    "path": "<Keyboard>/#(M)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

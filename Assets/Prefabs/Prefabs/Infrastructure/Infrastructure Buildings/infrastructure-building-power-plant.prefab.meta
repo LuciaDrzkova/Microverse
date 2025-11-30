@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ba3aa0c66970f4f688ff1b616f5d4aef
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 234785
+  packageName: Toon City Pack
+  packageVersion: 1.0
+  assetPath: Assets/Loading Games/Toon City Pack/Prefabs/Infrastructure/Infrastructure
+    Buildings/infrastructure-building-power-plant.prefab
+  uploadId: 536772

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a047a8d59ad0d427d9fe140dc63fb1a2
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 234785
+  packageName: Toon City Pack
+  packageVersion: 1.0
+  assetPath: Assets/Loading Games/Toon City Pack/Prefabs/Infrastructure/Infrastructure
+    Buildings/infrastructure-building-stadium.prefab
+  uploadId: 536772
