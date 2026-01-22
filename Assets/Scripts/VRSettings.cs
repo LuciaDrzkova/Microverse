@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets; // Needed if this is the namespace
 
 public class VRSettings : MonoBehaviour
 {
@@ -27,6 +29,10 @@ public class VRSettings : MonoBehaviour
     [Header("Rotation Settings")]
     public Slider rotationSpeedSlider;
 
+    [Header("Movement Settings")]
+    public Slider movementSpeedSlider;
+    public DynamicMoveProvider moveProvider;
+
     void Start()
     {
         settingsPanel.SetActive(false);
@@ -47,6 +53,10 @@ public class VRSettings : MonoBehaviour
         resetPlayerButton.onClick.AddListener(ResetPlayer);
 
         rotationSpeedSlider.onValueChanged.AddListener(UpdateRotationSpeed);
+
+        // Movement Speed
+        movementSpeedSlider.value = moveProvider.moveSpeed;
+        movementSpeedSlider.onValueChanged.AddListener(UpdateMovementSpeed);
     }
 
     public void OpenSettings() => settingsPanel.SetActive(true);
@@ -95,6 +105,14 @@ public class VRSettings : MonoBehaviour
         foreach (var obj in Object.FindObjectsByType<RotateObjectAdvanced>(FindObjectsSortMode.None))
         {
             obj.smoothRotationSpeed = value;
+        }
+    }
+
+    public void UpdateMovementSpeed(float value)
+    {
+        if (moveProvider != null)
+        {
+            moveProvider.moveSpeed = value;
         }
     }
 }

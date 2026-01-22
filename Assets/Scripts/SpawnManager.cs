@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
@@ -11,6 +12,9 @@ public class SpawnManager : MonoBehaviour
     public float spawnDistance = 2f;
     public float groundY = 0f;
     public Transform spawnedParent;
+
+    [Header("Snap To Ground")]
+    public List<GameObject> noSnapPrefabs; 
 
     [Header("Audio")]
     public AudioClip spawnSound;        // Assign the sound in the Inspector
@@ -33,6 +37,10 @@ public class SpawnManager : MonoBehaviour
     {
         Vector3 pos = playerCamera.position + playerCamera.forward * spawnDistance;
         pos.y = groundY;
+        if (noSnapPrefabs.Contains(prefab))
+        {
+            pos.y = groundY+1f;
+        }
 
         GameObject newObj = SpawnAndSetup(prefab, pos, Quaternion.identity);
 
@@ -62,7 +70,12 @@ public class SpawnManager : MonoBehaviour
         rb.useGravity = false;
 
         // Add scripts
-        if (!newObj.GetComponent<SnapToGround>()) newObj.AddComponent<SnapToGround>();
+         // 🚫 Skip SnapToGround for excluded prefabs
+        if (!noSnapPrefabs.Contains(prefab))
+        {
+            if (!newObj.GetComponent<SnapToGround>())
+                newObj.AddComponent<SnapToGround>();
+        }    
         if (!newObj.GetComponent<RotateObjectAdvanced>()) newObj.AddComponent<RotateObjectAdvanced>();
         if (!newObj.GetComponent<SelectableObject>()) newObj.AddComponent<SelectableObject>();
         if (!newObj.GetComponent<DeletableObject>()) newObj.AddComponent<DeletableObject>();
