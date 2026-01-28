@@ -14,13 +14,16 @@ public class CitySaveManager : MonoBehaviour
 
     private void Awake()
     {
-        // Define the folder where saved cities will be stored
+    #if UNITY_EDITOR
+        savesFolder = Path.Combine(Application.dataPath, "Saves/Cities");
+    #else
         savesFolder = Path.Combine(Application.persistentDataPath, "Cities");
+    #endif
 
-        // Create folder if it doesn't exist
         if (!Directory.Exists(savesFolder))
             Directory.CreateDirectory(savesFolder);
     }
+
 
     // ---------------- SAVE ----------------
    public void SaveCity(string cityName)
