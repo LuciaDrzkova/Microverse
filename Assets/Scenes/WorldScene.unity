@@ -265,7 +265,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1680501587, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 1767192434, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2550,7 +2550,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 441.3, y: 333.9}
+  m_AnchoredPosition: {x: 439.1, y: 333.9}
   m_SizeDelta: {x: 100, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &250643989
@@ -3687,6 +3687,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SnapToGround
   groundY: 0.1
+  snapOffsetY: 0.1
 --- !u!114 &348960131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4523,8 +4524,8 @@ MonoBehaviour:
   - prefab: {fileID: 8975351485483291768, guid: 3f542aeac23234103bca45e3989b5882, type: 3}
     thumbnail: {fileID: 21300000, guid: 72237029bf2ba488a9b2061dea05cab1, type: 3}
     groupIndex: 0
-  - prefab: {fileID: 8975351485483291768, guid: 3f542aeac23234103bca45e3989b5882, type: 3}
-    thumbnail: {fileID: 21300000, guid: 73e096c3895df4922bb2a2f1f32d80f4, type: 3}
+  - prefab: {fileID: 6640174995143383478, guid: 55dd744a257c245458e1bfd8812005b1, type: 3}
+    thumbnail: {fileID: 21300000, guid: 8c5f86ab9b98a46928e7fa191a7aad18, type: 3}
     groupIndex: 0
   vegetationItems:
   - prefab: {fileID: 4126379289218943248, guid: 63ae42c25f16a44809ca3cd33d7a9db0, type: 3}
@@ -6803,6 +6804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SnapToGround
   groundY: 0.1
+  snapOffsetY: 0.1
 --- !u!114 &492246683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7148,6 +7150,12 @@ MonoBehaviour:
   confirmButton: {fileID: 1714656069}
   cancelButton: {fileID: 895265142}
   citySaveManager: {fileID: 499149799}
+  buttonsToHide:
+  - {fileID: 946023939}
+  - {fileID: 86326481}
+  - {fileID: 611782337}
+  - {fileID: 201692919}
+  - {fileID: 347764759}
 --- !u!114 &499149801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7161,6 +7169,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CityLoadUI
   loadPanel: {fileID: 201692919}
+  buttonsToHide:
+  - {fileID: 941129606}
+  - {fileID: 946023939}
+  - {fileID: 86326481}
+  - {fileID: 611782337}
+  - {fileID: 956450248}
+  - {fileID: 347764759}
   contentParent: {fileID: 1486225642}
   cityButtonPrefab: {fileID: 6416209623652031371, guid: 47fbcf10ac7924278be0c7534a8a5d73, type: 3}
   cancelButton: {fileID: 1098924647}
@@ -9553,6 +9568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SnapToGround
   groundY: 0.1
+  snapOffsetY: 0.1
 --- !u!114 &808146434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10060,7 +10076,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10216,6 +10232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SnapToGround
   groundY: 0.1
+  snapOffsetY: 0.1
 --- !u!114 &855110549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10415,6 +10432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SnapToGround
   groundY: 0.1
+  snapOffsetY: 0.1
 --- !u!114 &874874093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13033,6 +13051,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SnapToGround
   groundY: 0.1
+  snapOffsetY: 0.1
 --- !u!114 &1193153175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13979,6 +13998,30 @@ MonoBehaviour:
   - {fileID: 485164579804266847, guid: bba8b3a0347294793bef8ecb922b12c9, type: 3}
   - {fileID: 3921746822376692310, guid: adab67be2b17f41e38e5488522715541, type: 3}
   - {fileID: 6163481802978332577, guid: c822b87de18a549b6895e63c70879ecd, type: 3}
+  elevatedPrefabs:
+  - {fileID: 1125773312186881651, guid: 4c09331404ffc4edb8e3bd45290a44a7, type: 3}
+  - {fileID: 6599683274017525899, guid: cc432f69f828a4e8090cc5db3776e3b8, type: 3}
+  - {fileID: 5900967072580627644, guid: bbf46b558740d4273b9ad364134cdc15, type: 3}
+  - {fileID: 6293383844138054851, guid: 037fb8825d05b4504b9ea1927c8c33ed, type: 3}
+  - {fileID: 3552124615118846974, guid: 6aefeedbec8944209aade3716f3d8e7e, type: 3}
+  - {fileID: 2197560748146726688, guid: e2fe21a84dfce40e8b6531ab9566ecd6, type: 3}
+  - {fileID: 8408161483928622792, guid: 45ccfac8929694455afd5484564b7b8a, type: 3}
+  - {fileID: 871344785740461313, guid: bf514638ac25d40ab80ef3c370687eb4, type: 3}
+  - {fileID: 6827844487102334867, guid: 8cc50a0c910d9458ca98a023ae53a653, type: 3}
+  - {fileID: 506568840638941705, guid: f20716a3bfccc4fb68b57d11a65f5de2, type: 3}
+  - {fileID: 3803414748185277014, guid: 61ac6f1514aab466ead02647380471e8, type: 3}
+  - {fileID: 1134772269987273031, guid: 58ba8f4a68cb843b18e6750b20da378d, type: 3}
+  - {fileID: 3532619458190240840, guid: 141d384dfe5354ea6af907fb9777f00a, type: 3}
+  - {fileID: 4495293613856386159, guid: 4c935a2efc5d743f79f3a98020a53940, type: 3}
+  - {fileID: 2542263255950336145, guid: 8a37f1bdccd634fdcb6747ff48f40b6f, type: 3}
+  - {fileID: 6952246608265359695, guid: 5977d76ba0f5b4c48bf20201c9d9fa30, type: 3}
+  - {fileID: 8813123343900450371, guid: 5993e9227ef0e46c29b03a6b2d0d6622, type: 3}
+  - {fileID: 6465886743113701369, guid: 20dd74ff05bc444f58d9137897e5b915, type: 3}
+  - {fileID: 6845548377388540662, guid: ef17ab7a587364708871f90ec43ed308, type: 3}
+  - {fileID: 7614955451234883000, guid: 7268fae5251514a319a092b8307d9595, type: 3}
+  - {fileID: 3173132780529593639, guid: 4b72bc0c357ae493a84382c5f193f5ec, type: 3}
+  - {fileID: 1183038173969327049, guid: 9e1c3a71aff4145968875556739becde, type: 3}
+  elevatedOffset: 0.2
   spawnSound: {fileID: 8300000, guid: eb2e6dbce819e4debab6b8b8bef7a35e, type: 3}
 --- !u!1 &1304363324
 GameObject:
@@ -14166,6 +14209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SnapToGround
   groundY: 0.1
+  snapOffsetY: 0.1
 --- !u!114 &1305568031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14245,6 +14289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SnapToGround
   groundY: 0.1
+  snapOffsetY: 0.1
 --- !u!114 &1324628693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16407,6 +16452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SnapToGround
   groundY: 0.1
+  snapOffsetY: 0.1
 --- !u!114 &1601132712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17735,6 +17781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SnapToGround
   groundY: 0.1
+  snapOffsetY: 0.1
 --- !u!114 &1753574195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18562,6 +18609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SnapToGround
   groundY: 0.1
+  snapOffsetY: 0.1
 --- !u!114 &1804126729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18714,10 +18762,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1472953538}
   m_HandleRect: {fileID: 1954133537}
   m_Direction: 0
-  m_MinValue: -1
-  m_MaxValue: 15
+  m_MinValue: -6
+  m_MaxValue: 12
   m_WholeNumbers: 0
-  m_Value: 5
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -18729,7 +18777,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 5
+          m_FloatArgument: 1
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -18904,6 +18952,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SnapToGround
   groundY: 0.1
+  snapOffsetY: 0.1
 --- !u!114 &1830963619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19597,6 +19646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SnapToGround
   groundY: 0.1
+  snapOffsetY: 0.1
 --- !u!114 &1899014456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19850,6 +19900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SnapToGround
   groundY: 0.1
+  snapOffsetY: 0.1
 --- !u!114 &1918566774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21569,7 +21620,7 @@ MonoBehaviour:
   extraUI: {fileID: 595276748}
   buildModeY: 0
   exploreModeY: 0
-  godModeY: 10
+  godHeight: 14
   currentMode: 0
   leftController: {fileID: 2048522554}
   rightController: {fileID: 722496679}
@@ -21582,10 +21633,10 @@ MonoBehaviour:
   uiRoot: {fileID: 1697852057}
   godControllerOffset: {x: 0, y: 0, z: 0.5}
   godMoveAction: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  godMoveSpeed: 5
   flyUpAction: {fileID: -3385761649333384340, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   flyDownAction: {fileID: -3678636154667588790, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  godVerticalSpeed: 5
+  vrSettings: {fileID: 2066323387}
+  godModeSpeedMultiplier: 1
   xrRigFlyScript: {fileID: 2098561184}
 --- !u!114 &2066323386
 MonoBehaviour:
@@ -21608,6 +21659,12 @@ MonoBehaviour:
   - {fileID: 79270464}
   - {fileID: 1570953974}
   - {fileID: 2012885596}
+  - {fileID: 347764759}
+  - {fileID: 956450248}
+  - {fileID: 201692919}
+  - {fileID: 611782337}
+  - {fileID: 86326481}
+  - {fileID: 946023939}
 --- !u!114 &2066323387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21630,7 +21687,6 @@ MonoBehaviour:
   - {fileID: 538403826}
   - {fileID: 187829508}
   - {fileID: 2109784888}
-  - {fileID: 0}
   - {fileID: 611782338}
   - {fileID: 86326482}
   - {fileID: 79270465}
@@ -21647,6 +21703,13 @@ MonoBehaviour:
   rotationSpeedSlider: {fileID: 1998918530}
   movementSpeedSlider: {fileID: 1830749867}
   moveProvider: {fileID: 1329021328}
+  buttonsToHide:
+  - {fileID: 956450248}
+  - {fileID: 201692919}
+  - {fileID: 611782337}
+  - {fileID: 86326481}
+  - {fileID: 946023939}
+  - {fileID: 946023939}
 --- !u!4 &2098561169 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}

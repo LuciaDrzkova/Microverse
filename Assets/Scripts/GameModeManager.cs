@@ -24,7 +24,7 @@ public class GameModeManager : MonoBehaviour
     [Header("Heights")]
     public float buildModeY = 10f;
     public float exploreModeY = 0f;
-    public float godModeY = 20f;
+    public float godHeight = 15f;
 
     public MicroverseMode currentMode = MicroverseMode.Build;
 
@@ -64,12 +64,12 @@ public class GameModeManager : MonoBehaviour
 
     [Header("God Mode Movement")]
     public InputActionReference godMoveAction;   // Vector2 (stick / WASD)
-    public float godMoveSpeed = 5f;
 
     [Header("God Mode Vertical Movement")]
     public InputActionReference flyUpAction; // N
     public InputActionReference flyDownAction; // B
-    public float godVerticalSpeed = 5f;
+    public VRSettings vrSettings;
+    public float godModeSpeedMultiplier = 1f;  // tweak to match Build/Explore
 
     [Header("XR Rig Fly Script")]
     public MonoBehaviour xrRigFlyScript;  // drag your existing fly script here
@@ -163,6 +163,8 @@ public class GameModeManager : MonoBehaviour
         if (xrRig == null || xrCamera == null) return;
 
         Vector3 move = Vector3.zero;
+        float speed = vrSettings.movementSpeedSlider.value * godModeSpeedMultiplier;
+
 
     // Horizontal (stick)
     if (godMoveAction != null && godMoveAction.action != null)
@@ -170,29 +172,39 @@ public class GameModeManager : MonoBehaviour
         Vector2 input = godMoveAction.action.ReadValue<Vector2>();
         if (input.sqrMagnitude>0.001f)
         {
-            Vector3 forward = xrCamera.transform.forward;
-            Vector3 right = xrCamera.transform.right;
+            Quaternion yawOnly = Quaternion.Euler(
+                0f,
+                xrCamera.transform.eulerAngles.y,
+                0f
+            );
 
-            forward.y = 0f;
-            right.y = 0f;
+            Vector3 forward = yawOnly * Vector3.forward;
+            Vector3 right   = yawOnly * Vector3.right;
 
-            forward.Normalize();
-            right.Normalize();
             
-            move += forward * input.y * godMoveSpeed * Time.deltaTime;
-            move += right * input.x * godMoveSpeed * Time.deltaTime;
+            move += forward * input.y * speed * Time.deltaTime;
+            move += right * input.x * speed * Time.deltaTime;
         }
     }
 
-    // Vertical (N / B)
-    if (flyUpAction != null && flyUpAction.action.ReadValue<float>() > 0.1f)
-        move += Vector3.up * godVerticalSpeed * Time.deltaTime;
+    float vertical = 0f;
 
-    if (flyDownAction != null && flyDownAction.action.ReadValue<float>() > 0.1f)
-        move += Vector3.down * godVerticalSpeed * Time.deltaTime;
+    bool flyUp =
+        (flyUpAction != null && flyUpAction.action.ReadValue<float>() > 0.1f) ||
+        (Keyboard.current != null && Keyboard.current.pKey.isPressed);
 
+    bool flyDown =
+        (flyDownAction != null && flyDownAction.action.ReadValue<float>() > 0.1f) ||
+        (Keyboard.current != null && Keyboard.current.cKey.isPressed);
+
+    if (flyUp) vertical += 1f;
+    if (flyDown) vertical -= 1f;
+
+    godHeight += vertical * speed * Time.deltaTime;
     xrRig.position += move;
+
     }
+
 
     void ApplyGrabMode(MicroverseMode mode)
     {
@@ -252,6 +264,9 @@ public class GameModeManager : MonoBehaviour
 
             case MicroverseMode.God:
                 SetHeadTracking(false);
+                SetRigHeight(godHeight);
+                godHeight = xrRig.position.y;
+                SetRigHeight(godHeight);
 
                 leftController.transform.SetParent(leftControllerRoot, true);
                 rightController.transform.SetParent(rightControllerRoot, true);
@@ -302,9 +317,10 @@ public class GameModeManager : MonoBehaviour
     {
 
         if (currentMode != MicroverseMode.God) return;
-
-        SetRigHeight(godModeY);
+        
+        SetRigHeight(godHeight);
         HandleGodModeMovement();
+        
 
         leftControllerRoot.position = xrCamera.transform.position;
         rightControllerRoot.position = xrCamera.transform.position;

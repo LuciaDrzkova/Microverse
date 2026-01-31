@@ -11,9 +11,12 @@ public class InfoPopup : MonoBehaviour
         // Make sure the info panel is hidden at start
         infoCanvas.SetActive(false);
 
-        // Ensure all other buttons are visible at start
+        // Ensure all other buttons that are active in the scene are visible at start
         foreach (GameObject btn in buttonsToHide)
-            btn.SetActive(true);
+        {
+            if (btn != null && btn.activeInHierarchy)
+                btn.SetActive(true);
+        }
     }
 
     // Called by the Info button
@@ -21,9 +24,12 @@ public class InfoPopup : MonoBehaviour
     {
         infoCanvas.SetActive(true);
 
-        // Hide all other buttons
+        // Hide all other buttons that are active in the scene
         foreach (GameObject btn in buttonsToHide)
-            btn.SetActive(false);
+        {
+            if (btn != null && btn.activeInHierarchy)
+                btn.SetActive(false);
+        }
     }
 
     // Called by the OK button
@@ -31,8 +37,11 @@ public class InfoPopup : MonoBehaviour
     {
         infoCanvas.SetActive(false);
 
-        // Show all other buttons again
-        foreach (GameObject btn in buttonsToHide)
-            btn.SetActive(true);
+        // Show only the first 7 buttons that exist
+        for (int i = 0; i < buttonsToHide.Length && i < 7; i++)
+        {
+            if (buttonsToHide[i] != null)
+                buttonsToHide[i].SetActive(true);
+        }
     }
 }

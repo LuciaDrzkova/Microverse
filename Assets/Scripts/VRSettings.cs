@@ -33,13 +33,28 @@ public class VRSettings : MonoBehaviour
     public Slider movementSpeedSlider;
     public DynamicMoveProvider moveProvider;
 
+    [Header("Buttons to Hide when Settings Open")]
+    public GameObject[] buttonsToHide; 
+
     void Start()
     {
         settingsPanel.SetActive(false);
-
-        float vol;
-        if (audioMixer.GetFloat("MasterVolume", out vol))
-            masterVolumeSlider.value = Mathf.Pow(10, vol / 20f);
+        // Initialize slider value
+            if (audioMixer != null)
+            {
+                float vol;
+                if (audioMixer.GetFloat("MasterVolume", out vol))
+                    masterVolumeSlider.value = Mathf.Pow(10, vol / 20f);
+            }
+            else
+            {
+                // Check DemoMusic
+                DemoMusicManager demoMusic = FindFirstObjectByType<DemoMusicManager>();
+                if (demoMusic != null && demoMusic.audioSource != null)
+                    masterVolumeSlider.value = demoMusic.audioSource.volume;
+                else
+                    masterVolumeSlider.value = 1f; // default
+            }
         masterVolumeSlider.onValueChanged.AddListener(delegate { OnMasterVolumeChanged(); });
 
         enableHighlightToggle.isOn = true;
@@ -59,16 +74,46 @@ public class VRSettings : MonoBehaviour
         movementSpeedSlider.onValueChanged.AddListener(UpdateMovementSpeed);
     }
 
-    public void OpenSettings() => settingsPanel.SetActive(true);
-    public void CloseSettings() => settingsPanel.SetActive(false);
+    // Open Settings and hide other buttons
+    public void OpenSettings()
+    {
+        settingsPanel.SetActive(true);
+
+        foreach (GameObject btn in buttonsToHide)
+        {
+            if (btn != null && btn.activeInHierarchy)
+                btn.SetActive(false);
+        }
+    }
+
+    // Close Settings and restore first 7 buttons
+    public void CloseSettings()
+    {
+        settingsPanel.SetActive(false);
+
+           
+        
+    }
 
     public void OnMasterVolumeChanged()
+{
+    // 1️⃣ If AudioMixer exists (Scene 2)
+    if (audioMixer != null)
     {
         if (masterVolumeSlider.value <= 0f)
             audioMixer.SetFloat("MasterVolume", -80f);
         else
             audioMixer.SetFloat("MasterVolume", Mathf.Log10(masterVolumeSlider.value) * 20);
     }
+
+    // 2️⃣ If DemoMusic exists (Demo Scene)
+    DemoMusicManager demoMusic = FindFirstObjectByType<DemoMusicManager>();
+    if (demoMusic != null && demoMusic.audioSource != null)
+    {
+        demoMusic.audioSource.volume = masterVolumeSlider.value;
+    }
+}
+
 
     public void OnEnableHighlightsToggled()
     {

@@ -16,6 +16,10 @@ public class SpawnManager : MonoBehaviour
     [Header("Snap To Ground")]
     public List<GameObject> noSnapPrefabs; 
 
+    [Header("Elevated Spawn")]
+    public List<GameObject> elevatedPrefabs;
+    public float elevatedOffset = 0.2f;
+
     [Header("Audio")]
     public AudioClip spawnSound;        // Assign the sound in the Inspector
     private AudioSource audioSource;
@@ -36,15 +40,23 @@ public class SpawnManager : MonoBehaviour
     public void RequestSpawn(GameObject prefab)
     {
         Vector3 pos = playerCamera.position + playerCamera.forward * spawnDistance;
+
+        // Default
         pos.y = groundY;
-        if (noSnapPrefabs.Contains(prefab))
+
+        // Elevated prefabs
+        if (elevatedPrefabs.Contains(prefab))
         {
-            pos.y = groundY+1f;
+            pos.y = groundY + elevatedOffset;
+        }
+        // No-snap prefabs (but not elevated ones)
+        else if (noSnapPrefabs.Contains(prefab))
+        {
+            pos.y = groundY + 1f;
         }
 
         GameObject newObj = SpawnAndSetup(prefab, pos, Quaternion.identity);
 
-        // Play spawn sound
         PlaySpawnSound();
     }
 
@@ -69,13 +81,20 @@ public class SpawnManager : MonoBehaviour
         rb.isKinematic = true;
         rb.useGravity = false;
 
-        // Add scripts
-         // 🚫 Skip SnapToGround for excluded prefabs
+        // SnapToGround (ONLY if allowed)
         if (!noSnapPrefabs.Contains(prefab))
         {
-            if (!newObj.GetComponent<SnapToGround>())
-                newObj.AddComponent<SnapToGround>();
-        }    
+            SnapToGround snap = newObj.GetComponent<SnapToGround>();
+            if (!snap)
+                snap = newObj.AddComponent<SnapToGround>();
+
+            snap.groundY = groundY;
+
+            if (elevatedPrefabs.Contains(prefab))
+                snap.snapOffsetY = elevatedOffset;
+            else
+                snap.snapOffsetY = 0f;
+        }
         if (!newObj.GetComponent<RotateObjectAdvanced>()) newObj.AddComponent<RotateObjectAdvanced>();
         if (!newObj.GetComponent<SelectableObject>()) newObj.AddComponent<SelectableObject>();
         if (!newObj.GetComponent<DeletableObject>()) newObj.AddComponent<DeletableObject>();

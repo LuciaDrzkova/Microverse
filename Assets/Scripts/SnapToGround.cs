@@ -10,6 +10,7 @@ public class SnapToGround : MonoBehaviour
 
     [Header("Ground Settings")]
     public float groundY = 0f;
+    public float snapOffsetY = 0.1f;
 
     void Awake()
     {
@@ -31,7 +32,7 @@ public class SnapToGround : MonoBehaviour
     {
         // Snap to ground
         Vector3 pos = transform.position;
-        pos.y = groundY;
+        pos.y = groundY + snapOffsetY;
         transform.position = pos;
 
         // KEEP user rotation, only flatten X/Z tilt
